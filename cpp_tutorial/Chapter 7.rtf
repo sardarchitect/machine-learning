@@ -1,0 +1,317 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl240\slmult1\qc\b\f0\fs22\lang9 7.1 Control flow introduction\par
+\par
+
+\pard\sl240\slmult1\b0 -  The specific sequence of statements that the CPU executes is called the program\rquote s execution path (or path, for short).\par
+- Straight-line programs take the same path (execute the same statements in the same order) every time they are run.\par
+- Control flow statements (also called flow control statements) are statements that allow the programmer to change the normal path of execution through the program\par
+- When a control flow statement causes point of execution to change to a non-sequential statement, this is called branching.\par
+\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 Conditional statements: Conditional statements cause a sequence of code to execute only if some condition is met.\par
+
+\pard\sl240\slmult1\tab eg. If, switch\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 Jumps: Jumps tell the CPU to start executing the statements at some other location. \par
+
+\pard\sl240\slmult1\tab eg. Goto, break, continue\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 Function calls: Function calls are jumps to some other location and back.\par
+
+\pard\sl240\slmult1\tab eg. Function calls, return\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 Loops: Loops tell the program to repeatedly execute some sequence of code zero or more times, until some condition is met. \par
+
+\pard\sl240\slmult1\tab eg. While, do-while, for, ranged-for\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 Halts: alts tell the program to quit running.\par
+
+\pard\sl240\slmult1\tab eg. std::exit(), std::abort()\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 Exceptions: Exceptions are a special kind of flow control structure designed for error handling.\par
+
+\pard\sl240\slmult1\tab eg. Try, throw, catch\par
+\par
+\par
+\b\par
+
+\pard\sl240\slmult1\qc 7.2 If statements and blocks\par
+\par
+
+\pard\sl240\slmult1\b0 - A conditional statement is a statement that specifies whether some associated statement(s) should be executed or not.\par
+- If: Most commpon conditional statment\par
+- Consider putting single statements associated with an if or else in blocks (particularly while you are learning). More experienced C++ developers sometimes disregard this practice in favor of tighter vertical spacing.\par
+- If the programmer does not declare a block in the statement portion of an if statement or else statement, the compiler will implicitly declare one.\par
+\b\par
+
+\pard\sl240\slmult1\qc\par
+7.3 Common if statement problems\par
+\par
+
+\pard\sl240\slmult1\b0 - In a nested if statement, it is a good idea to explicitly enclose the inner if statement within a block. This allows us to attach an else to either if statement without ambiguity.\par
+- Use else if statements or logical operators to restructure nested if/else\par
+- Null statements do nothing. They are typically used when the language requires a statement to exist but the programmer doesn\rquote t need one. For readability, null statements are typically placed on their own lines. \par
+eg. if (x>0)\par
+\tab ; //This is a null statement\par
+-Be careful not to \ldblquote terminate\rdblquote  your if statement with a semicolon, otherwise your conditional statement(s) will execute unconditionally (even if they are inside a block). \b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.4 Switch statement basics\par
+\par
+
+\pard\sl240\slmult1\b0 - The idea behind a switch statement is simple: an expression (sometimes called the condition) is evaluated to produce a value. If the expression\rquote s value is equal to the value after any of the case labels, the statements after the matching case label are executed. If no matching value can be found and a default label exists, the statements after the default label are executed instead. eg.\par
+    switch (x)\par
+    \{\par
+        case 1:\par
+            std::cout << "One";\par
+            return;\par
+        case 2:\par
+            std::cout << "Two";\par
+            return;\par
+        default:\par
+            std::cout << "Unknown";\par
+            return;\par
+    \}\b\par
+\b0 - Prefer switch statements over if-else chains when there is a choice.\par
+- The one restriction is that the condition must evaluate to an integral type. Expressions that evaluate to floating point types, strings, and most other non-integral types may not be used here.\par
+- \b  \b0 The first kind of label is the case label, which is declared using the case keyword and followed by a constant expression. The constant expression must either match the type of the condition or must be convertible to that type.\par
+- The second kind of label is the default label (often called the default case), which is declared using the default keyword. If the conditional expression does not match any case label and a default label exists, execution begins at the first statement after the default label.\par
+- A break statement (declared using the break keyword) tells the compiler that we are done executing statements within the switch, and that execution should continue with the statement after the end of the switch block. This allows us to exit a switch statement without exiting the entire function.\par
+\b\par
+\par
+
+\pard\sl240\slmult1\qc\par
+7.5 Switch fallthrough and scoping\par
+\par
+
+\pard\sl240\slmult1\b0 - When a switch expression matches a case label or optional default label, execution begins at the first statement following the matching label. Execution will then continue sequentially until one of the following termination conditions happens:\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sl240\slmult1 The end of the switch block is reached.\par
+{\pntext\f1\'B7\tab}Another control flow statement (typically a break or return) causes the switch block or function to exit.\par
+{\pntext\f1\'B7\tab}Something else interrupts the normal flow of the program (e.g. the OS shuts the program down, the universe implodes, etc\'85)\b\par
+
+\pard\sl240\slmult1\b0 - Once the statements underneath a case or default label have started executing, they will overflow (fallthrough) into subsequent cases. Break or return statements are typically used to prevent this.\par
+- [[fallthrough]] keyword helps compiler know fallthrough is intentional\par
+- With if statements, you can only have a single statement after the if-condition, and that statement is considered to be implicitly inside a block. However, with switch statements, the statements after labels are all scoped to the the switch block. No implicit blocks are created.\par
+-  Because the statements under each case are not inside an implicit block, that means all statements inside the switch are part of the same scope. Thus, a variable defined in one case can be used in a later case, even if the case in which the variable is defined is never executed!\par
+- \b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.6 Goto statements\par
+\par
+
+\pard\sl240\slmult1\b0 - An unconditional jump causes execution to jump to another spot in the code. The term \ldblquote unconditional\rdblquote  means the jump always happens (unlike an if statement or switch statement, where the jump only happens conditionally based on the result of an expression).\par
+- In C++, unconditional jumps are implemented via a goto statement, and the spot to jump to is identified through use of a statement label. \par
+- Statement labels utilize a third kind of scope: function scope, which means the label is visible throughout the function even before its point of declaration.\par
+- goto statements can also jump forward\par
+- Use of goto is shunned in C++ (and other modern high level languages as well). \par
+- The primary problem with goto is that it allows a programmer to jump around the code arbitrarily. This creates what is not-so-affectionately known as spaghetti code. Spaghetti code is code that has a path of execution that resembles a bowl of spaghetti (all tangled and twisted), making it extremely difficult to follow the logic of such code.\par
+- Avoid goto statements (unless the alternatives are significantly worse for code readability).\b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.7 Intro to loops and while statements\par
+\par
+
+\pard\sl240\slmult1\b0 - A while statement is declared using the while keyword. When a while statement is executed, the condition is evaluated. If the condition evaluates to true, the associated statement executes. However, unlike an if statement, once the statement has finished executing, control returns to the top of the while statement and the process is repeated. This means a while statement will keep looping for as long as the condition evaluates to true.\par
+- Favor while(true) for intentional infinite loops.\par
+- Often, we want a loop to execute a certain number of times. To do this, it is common to use a loop variable, often called a counter. A loop variable is an integer that is used to count how many times a loop has executed. \par
+- Loop variables should be of type (signed) int.\par
+- Doing something every N iterations: can be done using modulus operator on counter\par
+- It is also possible to nest loops inside of other loops. \b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.8 Do while statements\par
+\par
+
+\pard\sl240\slmult1\b0 - A do while statement is a looping construct that works just like a while loop, except the statement always executes at least once. After the statement has been executed, the do-while loop checks the condition. If the condition evaluates to true, the path of execution jumps back to the top of the do-while loop and executes it again.\par
+- Favor while loops over do-while when given an equal choice.\b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.9 For statements\par
+\par
+
+\pard\sl240\slmult1\b0 - The for statement (also called a for loop) is preferred when we have an obvious loop variable because it lets us easily and concisely define, initialize, test, and change the value of loop variables.\par
+- First, the init-statement is executed. This only happens once when the loop is initiated. The init-statement is typically used for variable definition and initialization.\par
+- Second, for each loop iteration, the condition is evaluated. \par
+- Finally, after the statement is executed, the end-expression is evaluated.\par
+- For loops with multiple counters:  To assist with this, the programmer can define multiple variables in the init-statement, and can make use of the comma operator to change the value of multiple variables in the end-expression. Defining multiple variables (in the init-statement) and using the comma operator (in the end-expression) is acceptable inside a for statement.\par
+- Prefer for loops over while loops when there is an obvious loop variable. \par
+- Prefer while loops over for loops when there is no obvious loop variable.\b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.10 Break and continue\par
+\par
+
+\pard\sl240\slmult1\b0 - The break statement causes a while loop, do-while loop, for loop, or switch statement to end, with execution continuing with the next statement after the loop or switch being broken out of.\par
+-  A break statement terminates the switch or loop, and execution continues at the first statement beyond the switch or loop. A return statement terminates the entire function that the loop is within, and execution continues at point where the function was called.\par
+- The continue statement provides a convenient way to end the current iteration of a loop without terminating the entire loop.\par
+- Use break and continue when they simplify your loop logic.\par
+- Use early returns when they simplify your function\rquote s logic.\b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.11 Halts (exiting your program early)\par
+\par
+
+\pard\sl240\slmult1\b0 -   A halt is a flow control statement that terminates the program. In C++, halts are implemented as functions (rather than keywords), so our halt statements will be function calls.\par
+- When main returns, first, because we\rquote re leaving the function, all local variables and function parameters are destroyed (as per usual).\par
+- Next, a special function called std::exit() is called, with the return value from main() (the status code) passed in as an argument. \par
+- std::exit() is a function that causes the program to terminate normally. Normal termination means the program has exited in an expected way. Note that the term normal termination does not imply anything about whether the program was successful (that\rquote s what the status code is for).\par
+- std::exit() performs a number of cleanup functions. First, objects with static storage duration are destroyed. Then some other miscellaneous file cleanup is done if any files were used. Finally, control is returned back to the OS, with the argument passed to std::exit() used as the status code.\par
+- Although std::exit() is called implicitly when function main() ends, std::exit() can also be called explicitly to halt the program before it would normally terminate. When std::exit() is called this way, you will need to include the cstdlib header.\par
+- The std::exit() function does not clean up local variables in the current function or up the call stack.\par
+- Call std::atexit(cleaup_function) to call cleanup_function at std::exit()\par
+- The std::abort() function causes your program to terminate abnormally. Abnormal termination means the program had some kind of unusual runtime error and the program couldn\rquote t continue to run. For example, trying to divide by 0 will result in an abnormal termination. std::abort() does not do any cleanup.\par
+- The std::terminate() function is typically used in conjunction with exceptions (we\rquote ll cover exceptions in a later chapter). Although std::terminate can be called explicitly, it is more often called implicitly when an exception isn\rquote t handled (and in a few other exception-related cases). By default, std::terminate() calls std::abort(). \par
+- The short answer is \ldblquote almost never\rdblquote . Destroying local objects is an important part of C++ (particularly when we get into classes), and none of the above-mentioned functions clean up local variables. Exceptions are a better and safer mechanism for handling error cases. \par
+- Only use a halt if there is no safe way to return normally from the main function. If you haven\rquote t disabled exceptions, prefer using exceptions for handling errors safely.\b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.12 Introduction to testing your code\par
+\par
+
+\pard\sl240\slmult1\b0 - Software verification (a.k.a. software testing) is the process of determining whether or not the software works as expected in all cases.\par
+- Test your programs in small pieces\par
+- Testing a small part of your code in isolation to ensure that \ldblquote unit\rdblquote  of code is correct is called unit testing. Each unit test is designed to ensure that a particular behavior of the unit is correct.\par
+- Write your program in small, well defined units (functions or classes), compile often, and test your code as you go.\par
+- Informal testing: write a test and then erase it\par
+- Preserving your tests: Write tests and keep them so you can test again in future\par
+- Automating your test functions: Preserve your answers and check whether your test passed or failed automatically\par
+- Integration testing: Once each of your units has been tested in isolation, they can be integrated into your program and retested to make sure they were integrated properly. This is called an integration test.\b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.13 Code coverage\par
+\par
+
+\pard\sl240\slmult1\b0 - The term code coverage is used to describe how much of the source code of a program is executed while testing. \par
+- Statement coverage: The term statement coverage refers to the percentage of statements in your code that have been exercised by your testing routines.\par
+- Branch coverage Branch coverage refers to the percentage of branches that have been executed, each possible branch counted separately.\par
+- Aim for 100% branch coverage of your code.\par
+- Loop coverage: Loop coverage (informally called the 0, 1, 2 test) says that if you have a loop in your code, you should ensure it works properly when it iterates 0 times, 1 time, and 2 times. If it works correctly for the 2-iteration case, it should work correctly for all iterations greater than 2.  \par
+- Testing different categories of input: When writing functions that accept parameters, or when accepting user input, consider what happens with different categories of input. In this context, we\rquote re using the term \ldblquote category\rdblquote  to mean a set of inputs that have similar characteristics.\par
+- \b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.14 Common semantic errors in C++\par
+\par
+
+\pard\sl240\slmult1\b0 - Semantic errors occur when you write code that does not do what you intended.  \par
+- A conditional logic error occurs when the programmer incorrectly codes the logic of a conditional statement or loop condition\par
+- Infinite loops\par
+- Off-by-one errors: An off-by-one error is an error that occurs when a loop executes one too many or one too few times. \par
+- Incorrect operator precedence: Eg. when mixing Logical OR and Logical AND in the same expression (Logical AND takes precedence over Logical OR). Use explicit parenthesization to avoid these kinds of errors.\par
+- Precision issues with floating point types\par
+- Integer division\par
+- Accidental null statements\par
+- Not using a compound statement when one is required\b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.15 Detecting and handling errors\par
+\par
+
+\pard\sl240\slmult1\b0 - Many new programmers write code and then only test the happy path: only the cases where there are no errors. But you should also be planning for and testing your sad paths, where things can and will go wrong. \par
+-  Ways of error handling inside a function: \par
+\tab - Handle the error within the function\par
+\tab - Pass the error back to the caller to deal with\par
+\tab - Halt the program\par
+\tab - Throw an exception\par
+- Fatal errors: If the error is so bad that the program can not continue to operate properly, this is called a non-recoverable error (also called a fatal error). In such cases, the best thing to do is terminate the program.\par
+- Exceptions: Because returning an error from a function back to the caller is complicated (and the many different ways to do so leads to inconsistency, and inconsistency leads to mistakes), C++ offers an entirely separate way to pass errors back to the caller: exceptions.\par
+- The basic idea is that when an error occurs, an exception is \ldblquote thrown\rdblquote . If the current function does not \ldblquote catch\rdblquote  the error, the caller of the function has a chance to catch the error. If the caller does not catch the error, the caller\rquote s caller has a chance to catch the error. The error progressively moves up the call stack until it is either caught and handled (at which point execution continues normally), or until main() fails to handle the error (at which point the program is terminated with an exception error).\b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.16 std::cin and handling invalid input\par
+\par
+
+\pard\sl240\slmult1\b0 - A program that handles error cases well is said to be robust.\line - >>, when used to get user input, is called an "extraction" operator\par
+- When user enters input in response to an extraction operation, the input is stored in a data buffer inside std::cin.\par
+- A data buffer is a piece of memory set aside for storing data temporarily while its moved from one place to another. \par
+- When extraction operator used:\par
+\tab - If there is data already in the input buffer, that data is used for extraction.\par
+\tab - If the input buffer contains no data, the user is asked to input data for extraction (this is the case most of the time). \tab\tab When the user hits enter, a \lquote\\n\rquote  character will be placed in the input buffer.\par
+\tab - operator>> extracts as much data from the input buffer as it can into the variable (ignoring any leading whitespace \tab characters, such as spaces, tabs, or \lquote\\n\rquote ).\par
+\tab - Any data that can not be extracted is left in the input buffer for the next extraction.\par
+- Extraction succeeds if at least one character is extracted from the input buffer.  Any unextracted input is left in the input buffer for future extractions.\par
+- Extraction fails if the input data does not match the type of the variable being extracted to. \par
+- Validating input: The process of checking whether user input conforms to what the program is expecting is called input validation.\par
+- There are three basic ways to do input validation:\par
+\tab - Inline (as the user types)\par
+\tab\tab - Prevent the user from typing invalid input in the first place.\par
+\tab - Post-entry (after the user types)\par
+
+\pard\li1440\sl240\slmult1 - Let the user enter whatever they want into a string, then validate whether the string is correct, and if so, convert the string to the final variable format.\par
+- Let the user enter whatever they want, let std::cin and operator>> try to extract it, and handle the error cases\par
+
+\pard\sl240\slmult1 - We can generally separate input text errors into four types:\par
+
+\pard\li720\sl240\slmult1 - Input extraction succeeds but the input is meaningless to the program (e.g. entering \lquote k\rquote  as your mathematical operator).\par
+- Input extraction succeeds but the user enters additional input (e.g. entering \lquote *q hello\rquote  as your mathematical operator).\par
+- Input extraction fails (e.g. trying to enter \lquote q\rquote  into a numeric input).\par
+- Input extraction succeeds but the user overflows a numeric value.\par
+
+\pard\sl240\slmult1 - Thus, to make our programs robust, whenever we ask the user for input, we ideally should determine whether each of the above can possibly occur, and if so, write code to handle those cases.\par
+- This usually consists of 3 steps:\par
+
+\pard\li720\sl240\slmult1 - Check whether the user\rquote s input was what you were expecting. \par
+- If so, return the value to the caller.\par
+- If not, tell the user something went wrong and have them try again.\par
+
+\pard\sl240\slmult1 - Use std::cin.ignore(100, '\\n'); to remove 100 characters to remove out of buffer or until \\n is encountered\par
+- To ignore everything up to and including the next \lquote\\n\rquote  character, we call: \par
+\tab std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\\n');\par
+- Extraction operator fails if wrong dtype entered by user. When it fails, it ignores all future cin requests. To fix it:\par
+
+\pard\li720\sl240\slmult1 if (std::cin.fail()) // has a previous extraction failed?\par
+\{\par
+    // yep, so let's handle the failure\par
+    std::cin.clear(); // put us back in 'normal' operation mode\par
+    ignoreLine(); // and remove the bad input\par
+\}\par
+
+\pard\sl240\slmult1 - A failed extraction due to invalid input will cause the variable to be zero-initialized. Zero initialization means the variable is set to 0, 0.0, \ldblquote\rdblquote , or whatever value 0 converts to for that type.\par
+- Extraction succeeds but the user overflows a numeric value: When std::cin is overflowed, it goes into failure mode and subsequently skips all additoinal inputs.\par
+- As you write your programs, consider how users will misuse your program, especially around text input. For each point of text input, consider:\par
+    Could extraction fail?\par
+    Could the user enter more input than expected?\par
+    Could the user enter meaningless input?\par
+    Could the user overflow an input?\par
+
+\pard\sl240\slmult1\qc\b\par
+\par
+7.17 Assert and static_assert\par
+\par
+
+\pard\sl240\slmult1\b0 - Preconditions: must be true prior to execution\par
+- Invariants: must be true while component is executing\par
+- Postconditions: must be true after execution is complete\par
+- Assertion: Expression that will be true unless there is a bug in the program. If the expression evaluates to true, the assertion statement does nothing. If the conditional expression evaluates to false, an error message is displayed and the program is terminated (via std::abort).\par
+- \b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.18 Introduction to random number generation\par
+\par
+
+\pard\sl240\slmult1\b0 - A\b\par
+
+\pard\sl240\slmult1\qc\par
+\par
+7.19 Generating random numbers using Mersenne Twister\par
+
+\pard\sl240\slmult1\b0 - A\b\par
+
+\pard\sl240\slmult1\qc\par
+}
+ 

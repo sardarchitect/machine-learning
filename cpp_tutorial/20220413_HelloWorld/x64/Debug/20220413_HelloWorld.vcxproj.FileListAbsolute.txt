@@ -1,0 +1,2 @@
+D:\SardarchitectLabs\learncpp\20220413_HelloWorld\x64\Debug\20220413_HelloWorld.exe
+D:\SARDARCHITECTLABS\TUTORIALS\learncpp\20220413_HelloWorld\x64\Debug\20220413_HelloWorld.exe
